@@ -13,10 +13,9 @@ type Course struct {
 
 // User -
 type User struct {
-	Id             int    `json:"id"`
-	Name           string `json:"name"`
-	LoginId        string `json:"login_id"`
-	EnrollmentType string `json:"enrollment_type"`
+	Id      int    `json:"id"`
+	Name    string `json:"name"`
+	LoginId string `json:"login_id"`
 }
 
 // Group -
