@@ -12,12 +12,12 @@ type Client struct {
 
 // NewClient -
 func NewClient(baseURL, token *string) (*Client, error) {
-	c := Client{
-		RESTClient: &resty.Client{
-			Token:      *token,
-			AuthScheme: "Bearer",
-			BaseURL:    *baseURL},
-	}
+	c := Client{}
+
+	c.RESTClient = resty.New().
+		SetBaseURL(*baseURL).
+		SetAuthToken(*token).
+		SetAuthScheme("Bearer")
 
 	return &c, nil
 }
