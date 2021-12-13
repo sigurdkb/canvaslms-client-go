@@ -5,6 +5,21 @@ import (
 	"strconv"
 )
 
+// GetCourses - Returns a slice of course
+func (c *Client) GetCourses(courseCodes []int) ([]Course, error) {
+	var courses []Course
+
+	for _, courseCode := range courseCodes {
+		course, err := c.GetCourse(courseCode)
+		if err != nil {
+			return nil, err
+		}
+		courses = append(courses, *course)
+
+	}
+	return courses, nil
+}
+
 // GetCourse - Returns a course
 func (c *Client) GetCourse(courseCode int) (*Course, error) {
 	resp, err := c.RESTClient.R().Get("/api/v1/courses/" + strconv.Itoa(courseCode))
@@ -28,7 +43,7 @@ func (c *Client) GetCourse(courseCode int) (*Course, error) {
 	if err != nil {
 		return nil, err
 	}
-	course.Teachers, err = getUsers(c, course.Id, "student")
+	course.Students, err = getUsers(c, course.Id, "student")
 	if err != nil {
 		return nil, err
 	}
