@@ -37,8 +37,10 @@ func (c *Client) getResults(URL string) ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		results = append(results[:len(results)-1], ',')
-		results = append(results, recurse[1:]...)
+		if len(recurse) > 2 {
+			results = append(results[:len(results)-1], ',')
+			results = append(results, recurse[1:]...)
+		}
 	}
 	return results, nil
 }
